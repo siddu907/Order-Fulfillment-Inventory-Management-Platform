@@ -1,0 +1,937 @@
+{
+  "info": {
+    "name": "Order Fulfillment & Inventory Management Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "POST /auth/register",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"customer@example.com\",\"full_name\":\"Example full name\",\"password\":\"replace-with-a-password\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "POST /auth/login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@gmail.com\",\"password\":\"Newpass@123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "POST /auth/refresh",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/refresh",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"refresh_token\":\"replace-with-refresh-token\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "POST /auth/logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        },
+        {
+          "name": "GET /auth/me",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "POST /auth/change-password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/change-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"new_password\":\"replace-with-a-password\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "POST /users",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"customer@example.com\",\"full_name\":\"Example full name\",\"password\":\"replace-with-a-password\",\"role\":\"customer\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users?page=1&page_size=20"
+          }
+        },
+        {
+          "name": "GET /users/{user_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/{{user_id}}"
+          }
+        },
+        {
+          "name": "PUT /users/{user_id}",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/{{user_id}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"customer@example.com\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "POST /products",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"sku\":\"SKU-EXAMPLE\",\"name\":\"Example name\",\"price\":0.0,\"cost_price\":\"0\",\"is_active\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /products",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products?page=1&page_size=20&category_id=1&active=true"
+          }
+        },
+        {
+          "name": "GET /products/{product_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products/{{product_id}}"
+          }
+        },
+        {
+          "name": "PUT /products/{product_id}",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/products/{{product_id}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"sku\":\"SKU-EXAMPLE\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "GET /categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/categories"
+          }
+        },
+        {
+          "name": "POST /categories",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/categories",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Example name\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /categories/{category_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/categories/{{category_id}}"
+          }
+        },
+        {
+          "name": "PUT /categories/{category_id}",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/categories/{{category_id}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Example name\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warehouses",
+      "item": [
+        {
+          "name": "GET /warehouses",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/warehouses"
+          }
+        },
+        {
+          "name": "POST /warehouses",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/warehouses",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Example name\",\"location\":\"Example location\",\"capacity\":0}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /warehouses/{warehouse_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/warehouses/{{warehouse_id}}"
+          }
+        },
+        {
+          "name": "PUT /warehouses/{warehouse_id}",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/warehouses/{{warehouse_id}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Example name\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /warehouses/{warehouse_id}/users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/warehouses/{{warehouse_id}}/users"
+          }
+        },
+        {
+          "name": "POST /warehouses/{warehouse_id}/users",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/warehouses/{{warehouse_id}}/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user_id\":1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "DELETE /warehouses/{warehouse_id}/users/{user_id}",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/warehouses/{{warehouse_id}}/users/{{user_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "GET /inventory",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory?page=1&page_size=20&warehouse_id=1&product_id=1&low_stock=false&out_of_stock=false"
+          }
+        },
+        {
+          "name": "GET /inventory/low-stock",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/low-stock"
+          }
+        },
+        {
+          "name": "GET /inventory/out-of-stock",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/out-of-stock"
+          }
+        },
+        {
+          "name": "GET /inventory/transactions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/transactions?page=1&page_size=20&warehouse_id=1&product_id=1"
+          }
+        },
+        {
+          "name": "GET /inventory/transactions/{transaction_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/transactions/{{transaction_id}}"
+          }
+        },
+        {
+          "name": "GET /inventory/{product_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/{{product_id}}?warehouse_id=1"
+          }
+        },
+        {
+          "name": "POST /inventory/adjust",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/inventory/adjust",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"product_id\":1,\"warehouse_id\":1,\"adjustment\":1,\"reason\":\"Example reason\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "example"
+              }
+            ]
+          }
+        },
+        {
+          "name": "POST /inventory/transfer",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/inventory/transfer",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"product_id\":1,\"source_warehouse_id\":1,\"destination_warehouse_id\":2,\"quantity\":1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "example"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "POST /orders",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"items\":[{\"product_id\":1,\"quantity\":2}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "example"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /orders",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders?status=confirmed&customer_id=1&warehouse_id=1&payment_status=example&created_from=2026-10-20T15:00:00Z&created_to=2026-10-20T15:00:00Z&min_total=0.0&max_total=0.0&page=1&page_size=20&sort_by=created_at&sort_order=desc"
+          }
+        },
+        {
+          "name": "GET /orders/{order_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/{{order_id}}"
+          }
+        },
+        {
+          "name": "PUT /orders/{order_id}",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/orders/{{order_id}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"confirmed\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /orders/{order_id}/items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/{{order_id}}/items"
+          }
+        },
+        {
+          "name": "GET /orders/{order_id}/history",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orders/{{order_id}}/history"
+          }
+        },
+        {
+          "name": "POST /orders/{order_id}/cancel",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orders/{{order_id}}/cancel"
+          }
+        },
+        {
+          "name": "POST /orders/{order_id}/reassign",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orders/{{order_id}}/reassign",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"agent_id\":1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "POST /orders/{order_id}/assign",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orders/{{order_id}}/assign",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"agent_id\":1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fulfillment",
+      "item": [
+        {
+          "name": "GET /fulfillment/orders/pending",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fulfillment/orders/pending"
+          }
+        },
+        {
+          "name": "GET /fulfillment/orders/assigned-to-me",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fulfillment/orders/assigned-to-me"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/accept",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/accept"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/start-processing",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/start-processing"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/pack",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/pack"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/ship",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/ship"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/deliver",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/deliver"
+          }
+        },
+        {
+          "name": "POST /fulfillment/orders/{order_id}/fail",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fulfillment/orders/{{order_id}}/fail"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "POST /payments/{order_id}/confirm",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/payments/{{order_id}}/confirm",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "example"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /payments/{order_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payments/{{order_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Returns",
+      "item": [
+        {
+          "name": "POST /returns",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_id\":1,\"reason\":\"Example reason\",\"items\":[{\"order_item_id\":1,\"quantity\":1}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "GET /returns",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/returns?status=confirmed&page=1&page_size=20"
+          }
+        },
+        {
+          "name": "GET /returns/{return_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/returns/{{return_id}}"
+          }
+        },
+        {
+          "name": "GET /returns/{return_id}/items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/returns/{{return_id}}/items"
+          }
+        },
+        {
+          "name": "POST /returns/{return_id}/approve",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns/{{return_id}}/approve"
+          }
+        },
+        {
+          "name": "POST /returns/{return_id}/reject",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns/{{return_id}}/reject"
+          }
+        },
+        {
+          "name": "POST /returns/{return_id}/receive",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns/{{return_id}}/receive"
+          }
+        },
+        {
+          "name": "POST /returns/{return_id}/refund",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/returns/{{return_id}}/refund"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "GET /notifications",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications?unread_only=false&page=1&page_size=20"
+          }
+        },
+        {
+          "name": "GET /notifications/{notification_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications/{{notification_id}}"
+          }
+        },
+        {
+          "name": "PATCH /notifications/{notification_id}/read",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/notifications/{{notification_id}}/read"
+          }
+        },
+        {
+          "name": "PATCH /notifications/read-all",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/notifications/read-all"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET /dashboard/admin",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard/admin"
+          }
+        },
+        {
+          "name": "GET /dashboard/warehouse",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard/warehouse?warehouse_id=1"
+          }
+        },
+        {
+          "name": "GET /dashboard/customer",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard/customer"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit logs",
+      "item": [
+        {
+          "name": "GET /audit-logs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/audit-logs?page=1&page_size=50&action=example&entity=example"
+          }
+        },
+        {
+          "name": "GET /audit-logs/{audit_id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/audit-logs/{{audit_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "GET /settings/tax-rate",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/settings/tax-rate"
+          }
+        },
+        {
+          "name": "PUT /settings/tax-rate",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/settings/tax-rate",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"rate_percent\":0.0}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
